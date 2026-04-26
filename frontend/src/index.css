@@ -1,0 +1,159 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --gold:       #C9A84C;
+  --gold-light: #E8C97A;
+  --gold-dark:  #9B7D2E;
+  --obsidian:   #0D0D0F;
+  --charcoal:   #161618;
+  --surface:    #1E1E22;
+  --surface2:   #252529;
+  --border:     #2E2E34;
+  --text:       #F0EDE8;
+  --muted:      #8A8590;
+  --ember:      #D6482B;
+  --ember-dim:  #a83520;
+  --radius:     12px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--obsidian);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5 { font-family: 'Playfair Display', serif; }
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--charcoal); }
+::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+::selection { background: var(--gold); color: var(--obsidian); }
+
+@layer components {
+  .glass-card {
+    background: rgba(30,30,34,0.9);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    backdrop-filter: blur(12px);
+  }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    background: linear-gradient(135deg, var(--ember) 0%, var(--ember-dim) 100%);
+    color: white; font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: 0.9rem;
+    letter-spacing: 0.04em; padding: 12px 28px; border-radius: var(--radius);
+    border: none; cursor: pointer; transition: all 0.25s ease; position: relative; overflow: hidden;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(214,72,43,0.4); }
+  .btn-primary:active { transform: translateY(0); }
+  .btn-primary:disabled { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: none; }
+
+  .btn-outline {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    background: transparent; color: var(--gold); font-family: 'DM Sans', sans-serif;
+    font-weight: 600; font-size: 0.9rem; letter-spacing: 0.04em; padding: 11px 27px;
+    border-radius: var(--radius); border: 1px solid var(--gold); cursor: pointer; transition: all 0.25s ease;
+  }
+  .btn-outline:hover { background: var(--gold); color: var(--obsidian); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.3); }
+
+  .field {
+    width: 100%; background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 0.95rem; padding: 12px 16px;
+    transition: border-color 0.2s, box-shadow 0.2s; outline: none;
+  }
+  .field:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.15); }
+  .field::placeholder { color: var(--muted); }
+  .field option { background: var(--surface); color: var(--text); }
+
+  .field-label {
+    display: block; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 6px;
+  }
+
+  .section-badge {
+    display: inline-block; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--gold); background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.25); padding: 4px 12px; border-radius: 99px; margin-bottom: 12px;
+  }
+
+  .auction-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  .auction-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 0 1px var(--gold-dark); border-color: var(--gold-dark); }
+
+  .page-content {
+    margin-left: 0; min-height: 100vh; padding: 80px 20px 40px;
+  }
+
+  .gold-line { height: 1px; background: linear-gradient(to right, transparent, var(--gold), transparent); }
+}
+
+@media (min-width: 1024px) {
+  .page-content { margin-left: 300px; padding: 48px 48px 40px; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+@keyframes orb {
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  50%       { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+}
+@keyframes tickerPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+.animate-fade-up  { animation: fadeUp 0.65s cubic-bezier(0.16,1,0.3,1) both; }
+.animate-fade-in  { animation: fadeIn 0.5s ease both; }
+.animate-float    { animation: float 5s ease-in-out infinite; }
+.animate-slide-in { animation: slideInLeft 0.35s ease both; }
+.animate-ticker   { animation: tickerPulse 1.5s ease infinite; }
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+.delay-700 { animation-delay: 0.7s; }
+
+.shimmer-text {
+  background: linear-gradient(90deg, var(--gold-dark) 0%, var(--gold-light) 40%, var(--gold) 60%, var(--gold-dark) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+.orb {
+  position: absolute; border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  filter: blur(80px); animation: orb 10s ease-in-out infinite; pointer-events: none; z-index: 0;
+}
