@@ -52,4 +52,9 @@ verifyCommissionCron();
 connection();
 app.use(errorMiddleware);
 
+// Root route (FIXES "Cannot GET /")
+app.get("/", (req, res) => {
+  res.send("Auction API is running 🚀");
+});
+
 export default app;
